@@ -1,5 +1,15 @@
 import random
 
+# Lite forord her c:
+# Dokumentasjonen er ikke nødvendigvis gjort på standard industri metode, de er mere brukt for å kommentere koden underveis.. 
+# Var usikker på om vi var nødt til å gjøre hele oppgaven OOP men valgte likevell å forsøke. 
+# Takk for et fint semester! Disse obligene har vært morro! 
+
+# Dersom jeg har ting som skal legges til neste gang jeg koder legger jeg de til i TODO under her: (Hvis det fortsatt er noe her så rakk jeg det ikke)
+# TODO : Legg til kort verdi for dealer
+# TODO : Fiks dokumentasjon..
+# TODO : Få meg et liv.. buying gf 100gp..
+
 
 class Card:
     def __init__(self, card_type: str, card_worth: str) -> None:
@@ -64,10 +74,6 @@ class Player:
         self.hand = []
 
     def calculate_hand_value(self) -> int:
-        """
-        Kalkulerer verdien av spillerens hand.
-
-        """
         total_value = 0
         num_aces = 0
 
@@ -94,6 +100,9 @@ class Player:
 
 
 class Dealer:
+    """
+    Dealer klassen gjør mye av det samme som spiller klassen, men dealer klassen har også en metode som gjør at det ene kortet ikke vises.
+    """
     def __init__(self) -> None:
         self.hand = []
 
@@ -135,6 +144,17 @@ class Dealer:
 
 
 class BlackjackGame:
+    """
+    BlackjackGame klassen er hvor logikken til spillet bygges opp.
+    Player turn metoden starter en while løkke som går stegvis igjennom hva som skal skje i spillerens tur.
+    - Viser dealerns skjulte kort med reveal_dealer_card metoden fra dealer klassen. 
+    - Spør om du vil hitte eller stå med en input prompt
+    - Dersom du hitter så bruker jeg add_card metoden fra player klassen
+    - Dersom du står så bryter loopen og dersom du går over 21 bryter loopen.
+    Dealer turn metoden gjør mye av det samme, bare automatisk.
+    - Dersom dealers hånd verdi er mindre enn 17 MÅ dealer trekke.
+    Vinner blir funnet ved en rekke if tests i determine winner
+    """
     def __init__(self) -> None:
         self.deck = Deck()
         self.deck.shuffle()
@@ -157,15 +177,17 @@ class BlackjackGame:
             print("Player's Turn!")
             print(self.player)
             self.reveal_dealer_card()
-            action = input("Do you want to (h)it or (s)tand? ").lower()
-            if action == 'h':
+            action = input("Do you want to hit or stand?: [hit], [stand]: ").lower()
+            if action == 'hit':
                 self.player.add_card(self.deck.deal_card())
                 if self.player.calculate_hand_value() > 21:
                     print("Bust! You went over 21.")
                     print("______________________________")
                     break
-            elif action == 's':
+            elif action == 'stand':
                 break
+            else:
+                print("Invalid input! Try again!")
 
     def dealer_turn(self) -> None:
         print("______________________________")
@@ -197,6 +219,17 @@ class BlackjackGame:
             return "Push (Tie)"
 
     def play(self) -> None:
+        """
+        Play metoden er der rekkefølge logikken bestemmes på spillet, og der spillet kjører fra senere.
+        Vi starter med en while løkke som spør etter hvor mye spilleren vil gamble.
+        Løkken bryter når spilleren har lagt inn et gyldig beløp.
+        Så blir hendene til player og dealer cleared, dette er for at det skal gå ann å spille flere runder.
+        Så blir kortene delt ut.
+        Etterpå det så bruker jeg metoder fra klassene før til å sjekke om kravene til enten et tapt spill eller et vunnet spill har skjedd med hjelp av if tester.
+        Til slutt blir potten clearet og du får oppgitt ditt nye beløp.
+        Du blir spurt om du vil starte ny runde, hvis du gjør det starter man fra begynnelsen av play metoden igjen.
+        Hvis ikke bryter løkken.
+        """
         while True:
             print("Welcome to Blackjack!")
             while True:
@@ -237,3 +270,12 @@ class BlackjackGame:
                 break
 
 
+
+        """
+        If test som brukes for å sjekke om kode arket skal runnes eller ikke.
+        Vanligvis dersom man har en klasse eller klasser som her så importeres de til en annen fil.
+        Dermed ville denne snutten ikke vanligvis ha vært her, men for oppgavens skyld så ligger den her så koden kan runnes.
+        """
+if __name__ == "__main__":
+    game = BlackjackGame()
+    game.play()
