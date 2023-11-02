@@ -2,13 +2,13 @@ import random
 
 # Lite forord her c:
 # Dokumentasjonen er ikke nødvendigvis gjort på standard industri metode, de er mere brukt for å kommentere koden underveis.. 
-# Var usikker på om vi var nødt til å gjøre hele oppgaven OOP men valgte likevell å forsøke. 
-# Takk for et fint semester! Disse obligene har vært morro! 
+# Var usikker på om vi var nødt til å gjøre hele oppgaven OOP men valgte likevell å forsøke.
+# Se dokumentasjon i teori oppgave for mer info. 
 
 # Dersom jeg har ting som skal legges til neste gang jeg koder legger jeg de til i TODO under her: (Hvis det fortsatt er noe her så rakk jeg det ikke)
-# TODO : Legg til kort verdi for dealer
+# TODO : Legg til kort verdi for dealer..
 # TODO : Fiks dokumentasjon..
-# TODO : Få meg et liv.. buying gf 100gp..
+# TODO : La spiller lage eget navn..
 
 
 class Card:
